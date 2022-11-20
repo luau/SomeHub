@@ -253,18 +253,7 @@ local function randomString()
 	return table.concat(randomarray)
 end
 
-local LibName = tostring(math.random(1, 100))..randomString()
-
 function Library:CreateWindow(NameWindow, WholeConfigName)
-
-	function CG_Check()
-		if game:GetService("CoreGui"):FindFirstChild(tostring(_G.EJNjnegeJNGrejwng3242ntjkgewnrkjeRE)) then
-			game:GetService("CoreGui")[tostring(_G.EJNjnegeJNGrejwng3242ntjkgewnrkjeRE)]:Destroy()
-		end
-	end
-	spawn(deleteit)
-	wait(0.4)
-	_G.EJNjnegeJNGrejwng3242ntjkgewnrkjeRE = LibName
 
 	local MethodContainer = {}
 	local Folder = game:GetObjects("rbxassetid://7141683860")[1]
@@ -392,10 +381,6 @@ function Library:CreateWindow(NameWindow, WholeConfigName)
 
 	function MethodContainer:Toggle(State)
 		Toggle(State)
-	end
-
-	function MethodContainer:DestroyUI()
-		game:GetService("CoreGui")[_G.EJNjnegeJNGrejwng3242ntjkgewnrkjeRE]:Destroy()
 	end
 
 	function MethodContainer:ChangeColor(Color)
