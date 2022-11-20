@@ -244,7 +244,28 @@ local function MakeResizeable(Object)
 		end
 	end)
 end
+
+local function randomString()
+	local randomarray = {}
+	for i = 1, math.random(10, 20) do
+		randomarray[i] = string.char(math.random(32, 126))
+	end
+	return table.concat(randomarray)
+end
+
+local LibName = tostring(math.random(1, 100))..randomString()
+
 function Library:CreateWindow(NameWindow, WholeConfigName)
+
+	function CG_Check()
+		if game:GetService("CoreGui"):FindFirstChild(tostring(_G.EJNjnegeJNGrejwng3242ntjkgewnrkjeRE)) then
+			game:GetService("CoreGui")[tostring(_G.EJNjnegeJNGrejwng3242ntjkgewnrkjeRE)]:Destroy()
+		end
+	end
+	spawn(deleteit)
+	wait(0.4)
+	_G.EJNjnegeJNGrejwng3242ntjkgewnrkjeRE = LibName
+
 	local MethodContainer = {}
 	local Folder = game:GetObjects("rbxassetid://7141683860")[1]
 	ScreenGui = Folder.Bracket:Clone()
@@ -371,6 +392,10 @@ function Library:CreateWindow(NameWindow, WholeConfigName)
 
 	function MethodContainer:Toggle(State)
 		Toggle(State)
+	end
+
+	function MethodContainer:DestroyUI()
+		game:GetService("CoreGui")[_G.EJNjnegeJNGrejwng3242ntjkgewnrkjeRE]:Destroy()
 	end
 
 	function MethodContainer:ChangeColor(Color)
@@ -1162,25 +1187,15 @@ function Library:CreateWindow(NameWindow, WholeConfigName)
 		end
 		return TabInit
 	end
-	local function randomString()
-		local randomarray = {}
-		for i = 1, math.random(10, 20) do
-			randomarray[i] = string.char(math.random(32, 126))
-		end
-		return table.concat(randomarray)
-	end
 	local cg = gs(game, "CoreGui")
 	if methodcontainer.hui then
-		ScreenGui.Name = randomString()
 		ScreenGui.Parent = methodcontainer.hui()
 	elseif methodcontainer.protgui and not (is_sirhurt_closure or (syn and DrawingImmediate)) then
-		ScreenGui.Name = randomString()
 		methodcontainer.protgui(ScreenGui)
 		ScreenGui.Parent = cg
 	elseif cg:FindFirstChild("RobloxGui") then
 		ScreenGui.Parent = cg.RobloxGui
 	else
-		ScreenGui.Name = randomString()
 		ScreenGui.Parent = cg
 	end
 	return MethodContainer, MainFrame, ScreenGui
