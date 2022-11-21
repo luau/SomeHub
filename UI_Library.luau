@@ -1135,7 +1135,7 @@ function Library:CreateWindow(NameWindow, WholeConfigName)
 
 	finder({
 		ghui = '(...):find("get") and ((...):find("hui") or (...):find("hid") and (...):find("gui"))',
-		protgui = 'name:find("protect") and name:find("gui") and not name:find("un")',
+		protgui = '(...):find("protect") and (...):find("gui") and not (...):find("un")',
 	})
 
 	if globalenv.ghui then
