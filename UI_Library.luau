@@ -1,47 +1,3 @@
-if not methodcontainer then
-	local genvs = { _G, shared }
-	methodcontainer = {}
-	local antioverflow = {}
-	local depth = 0
-	if getgenv then
-		table.insert(genvs, getgenv())
-	end
-	local function recurseEnv(env)
-		if depth >= 16380 then
-			return
-		end
-		for _, tab in ipairs(antioverflow) do
-			if tab == env then
-				return
-			end
-		end
-		table.insert(antioverflow, env)
-		depth = depth + 1
-		for name, val in next, env do
-			if type(val) == "table" then
-				recurseEnv(env[name])
-			elseif type(val) == "function" then
-				name = tostring(name):lower()
-
-				if name:find("get") then
-					if name:find("hid") then
-						if name:find("gui") then
-							methodcontainer.hui = val
-						end
-					elseif name:find("hui") then
-						methodcontainer.hui = val
-					end
-				elseif name:find("protect") and name:find("gui") and not name:find("un") then
-					methodcontainer.protgui = val
-				end
-			end
-		end
-		depth = depth - 1
-	end
-	recurseEnv(genvs)
-	table.clear(genvs)
-	genvs, antioverflow, depth, recurseEnv = nil, nil, nil, nil
-end
 local Library, ScreenGui = { Toggle = true, FirstTab = nil, TabCount = 0, ColorTable = {} }
 local textures, isTopBarEnabled, UserInputService, resizing, DraggingGUI, Mouse, DraggingSlider =
 	{
@@ -254,7 +210,6 @@ local function randomString()
 end
 
 function Library:CreateWindow(NameWindow, WholeConfigName)
-
 	local MethodContainer = {}
 	local Folder = game:GetObjects("rbxassetid://7141683860")[1]
 	ScreenGui = Folder.Bracket:Clone()
@@ -1172,15 +1127,28 @@ function Library:CreateWindow(NameWindow, WholeConfigName)
 		end
 		return TabInit
 	end
+	local globalenv = getgenv and getgenv() or _G or shared
 	local cg = gs(game, "CoreGui")
-	if methodcontainer.hui then
-		ScreenGui.Parent = methodcontainer.hui()
-	elseif methodcontainer.protgui and not (is_sirhurt_closure or (syn and DrawingImmediate)) then
-		methodcontainer.protgui(ScreenGui)
+	local finder = loadstring(
+		game:HttpGet("https://raw.githubusercontent.com/lua-u/SomeHub/main/UniversalMethodFinder.luau", true)
+	)()
+
+	finder({
+		ghui = '(...):find("get") and ((...):find("hui") or (...):find("hid") and (...):find("gui"))',
+		protgui = 'name:find("protect") and name:find("gui") and not name:find("un")',
+	})
+
+	if globalenv.ghui then
+		ScreenGui.Name = randomString()
+		ScreenGui.Parent = globalenv.ghui()
+	elseif globalenv.protgui and not (is_sirhurt_closure or (syn and DrawingImmediate)) then
+		ScreenGui.Name = randomString()
+		globalenv.protgui(ScreenGui)
 		ScreenGui.Parent = cg
 	elseif cg:FindFirstChild("RobloxGui") then
 		ScreenGui.Parent = cg.RobloxGui
 	else
+		ScreenGui.Name = randomString()
 		ScreenGui.Parent = cg
 	end
 	return MethodContainer, MainFrame, ScreenGui
