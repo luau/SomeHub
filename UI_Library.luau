@@ -226,7 +226,9 @@ function Library:CreateWindow(NameWindow, WholeConfigName)
 
 	Topbar.WindowName.Text = NameWindow
 	WholeConfigName = getfenv()[WholeConfigName] or _G[WholeConfigName] or shared[WholeConfigName] or {}
-
+	if not WholeConfigName.GUI_COLOR then
+		WholeConfigName.GUI_COLOR = Color3.fromRGB()
+	end
 	if WholeConfigName.GUI_XY_SCALE_POSITION then
 		MainFrame.Position =
 			UDim2.fromScale(WholeConfigName.GUI_XY_SCALE_POSITION[1], WholeConfigName.GUI_XY_SCALE_POSITION[2])
