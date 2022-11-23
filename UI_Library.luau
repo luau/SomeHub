@@ -1129,9 +1129,8 @@ function Library:CreateWindow(NameWindow, WholeConfigName)
 		end
 		return TabInit
 	end
-	local globalenv = getgenv and getgenv() or _G or shared
 	local cg = gs(game, "CoreGui")
-	local finder = loadstring(
+	local finder, globalcontainer = loadstring(
 		game:HttpGet("https://raw.githubusercontent.com/lua-u/SomeHub/main/UniversalMethodFinder.luau", true)
 	)()
 
@@ -1140,12 +1139,12 @@ function Library:CreateWindow(NameWindow, WholeConfigName)
 		protgui = '(...):find("protect") and (...):find("gui") and not (...):find("un")',
 	})
 
-	if globalenv.ghui then
+	if globalcontainer.ghui then
 		ScreenGui.Name = randomString()
-		ScreenGui.Parent = globalenv.ghui()
-	elseif globalenv.protgui and not (is_sirhurt_closure or (syn and DrawingImmediate)) then
+		ScreenGui.Parent = globalcontainer.ghui()
+	elseif globalcontainer.protgui and not (is_sirhurt_closure or (syn and DrawingImmediate)) then
 		ScreenGui.Name = randomString()
-		globalenv.protgui(ScreenGui)
+		globalcontainer.protgui(ScreenGui)
 		ScreenGui.Parent = cg
 	elseif cg:FindFirstChild("RobloxGui") then
 		ScreenGui.Parent = cg.RobloxGui
