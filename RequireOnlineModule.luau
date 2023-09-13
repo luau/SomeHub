@@ -1,0 +1,1 @@
+local a={}local b;b=function(c)local c=game:GetObjects(c)[1]local d=a[c]if d then return d end;local d=c.Source;local d=loadstring(d)local e=getfenv(d)e.script=c;e.require=b;local b=d()a[c]=b;return b end;return b
