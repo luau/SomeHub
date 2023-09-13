@@ -1,1 +1,1 @@
-local a={}local b;b=function(c)local c=game:GetObjects("rbxassetid://"..c)[1]local d=a[c]if d then return d end;local d=c.Source;local d=loadstring(d)local e=getfenv(d)e.script=c;e.require=b;local b=d()a[c]=b;return b end;return b
+local a={}local function b(c)local d=a[c]if d then return d end;local d=c.Source;local d=loadstring(d)local e=getfenv(d)e.script=c;e.require=b;local b=d()a[c]=b;return b end;local function a(a)local a=game:GetObjects("rbxassetid://"..a)[1]b(a)end;return a
