@@ -16,7 +16,6 @@ https://discord.com/invite/wx4ThpAsmw **/** https://discord.gg/wx4ThpAsmw<br />
 ## Documentation & Wiki:<br />https://github.com/luau/SomeHub/wiki
 ## ALL DISCUSSIONS & QUESTIONS GO TO:<br />https://github.com/luau/SomeHub/discussions
 
-## Roadmap:<br />
-https://github.com/orgs/luau/projects/1
+## Roadmap:<br /> https://github.com/orgs/luau/projects/1
 
 
