@@ -10,6 +10,9 @@
 <br />
 [![ko-fi](https://user-images.githubusercontent.com/95628489/231759262-25661006-b7ca-4967-a79d-2b465cd9575a.png)](https://ko-fi.com/M4M1JNH5G "KO-FI QR-CODE")
 
+## To-do:
+- [ ] Universal Loadstring that accepts multiple of our modules abbreviations then loads them and packs into table with keys being names of modules and values being tables containing packed output then it returns that main table
+
 ## DISCORD SERVER:<br />
 https://discord.com/invite/wx4ThpAsmw **/** https://discord.gg/wx4ThpAsmw<br />
 [<img src="https://discordapp.com/api/guilds/1022465460517740654/widget.png?style=banner2" alt="Our Official Discord Server!"></img>](https://discord.com/invite/wx4ThpAsmw)<br />
